@@ -24,7 +24,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'login';
+    public const LOGIN_ROUTE = 'home';
 
     private $entityManager;
     private $urlGenerator;
@@ -96,7 +96,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate('select_library'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
