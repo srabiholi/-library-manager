@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SelectLibraryController extends AbstractController
@@ -32,6 +33,7 @@ class SelectLibraryController extends AbstractController
         $entityManager->persist($library);
         $entityManager->flush();
 
+
             return $this->redirectToRoute('library', ['id' => $library->getId() ]);
 
 
@@ -41,14 +43,19 @@ class SelectLibraryController extends AbstractController
     /**
      * @Route("/select/library", name="select_library")
      */
-    public function index(LibraryRepository $repository): Response
+    public function index(LibraryRepository $repository, SessionInterface $session): Response
     {
+        
+        $sessionLibrary = $session->get('library', []);
+        // dump($sessionLibrary);
+        if(!empty($sessionLibrary)) {
+            unset($sessionLibrary);
+        }
 
         $user = $this->getUser()->getId();
 
         $librarys = $repository->findBy(['user' => $user]);
 
-        // dump($librarys);
 
         return $this->render('select_library/index.html.twig', [
             'librarys' => $librarys,

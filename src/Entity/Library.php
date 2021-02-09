@@ -6,6 +6,7 @@ use App\Repository\LibraryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Tree\RepositoryInterface;
 
 /**
  * @ORM\Entity(repositoryClass=LibraryRepository::class)
@@ -98,4 +99,6 @@ class Library
 
         return $this;
     }
+
+
 }
