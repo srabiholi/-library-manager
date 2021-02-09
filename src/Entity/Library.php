@@ -6,6 +6,8 @@ use App\Repository\LibraryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Tree\RepositoryInterface;
 
 /**
  * @ORM\Entity(repositoryClass=LibraryRepository::class)
@@ -20,7 +22,14 @@ class Library
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "le nom de votre Bibliothèque doit comporter au moins {{limit}} caractères",
+     *      maxMessage = "le nom de votre Bibliothèque doit pas dépasser {{limit}} caractères"
+     * )
      */
     private $name;
 
@@ -98,4 +107,6 @@ class Library
 
         return $this;
     }
+
+
 }

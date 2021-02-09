@@ -2,6 +2,11 @@
 
 {% block title %}Log in!{% endblock %}
 
+    {% block stylesheets %}
+        <link href="{{ asset('asset/css/login.css') }}"  rel="stylesheet">
+    {% endblock %}
+
+
 {% block body %}
 
 <div class="auth">
@@ -56,6 +61,7 @@
 
 </div>
 {% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('asset/js/script.js') }}"></script>
-        {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('asset/js/script.js') }}"></script>
+    {% endblock %}
