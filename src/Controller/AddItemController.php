@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Form\BookType;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class AddItemController extends AbstractController
     /**
      * @Route("/add/book", name="add_book")
      */
-    public function index(Request $request, SessionInterface $session): Response
+    public function index(Request $request, SessionInterface $session, EntityManager $entityManager): Response
     {
 
         $sessionLibrary = $session->get('library');
@@ -28,8 +29,12 @@ class AddItemController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            
+            $book->setLibrary($sessionLibrary);
         }
+        
+        $entityManager->persist($book);
+        $entityManager->flush();
+        
 
         return $this->render('library/add.html.twig', [
             'form' => $form->createView(),
