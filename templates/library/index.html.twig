@@ -4,4 +4,21 @@
 
 {% block body %}
 
+<div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+{% if books is not empty %}
+{% for book in books %}
+<p>{{ book.title }}</p>
+<p>{{ book.author }}</p>
+<p>{{ book.resume }}</p>
+<p><img src="{{ book.picture }}" whith="150" height="200"></p>
+
+{% endfor %}
+{% endif %}
+
+
+
+</div>
+
+
 {% endblock %}

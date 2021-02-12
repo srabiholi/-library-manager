@@ -7,6 +7,7 @@ use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -41,11 +42,11 @@ class AdminController extends AbstractController
             $em->persist($category);
             $em->flush();
 
-            // return $this->redirectToRoute('')
+            // return $this->redirectToRoute('category_add');
         }
 
         return $this->render('admin/category/add.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }
