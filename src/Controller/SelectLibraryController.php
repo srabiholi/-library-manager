@@ -34,7 +34,7 @@ class SelectLibraryController extends AbstractController
         $entityManager->flush();
 
 
-            return $this->redirectToRoute('library', ['id' => $library->getId() ]);
+        return $this->redirectToRoute('library', ['id' => $library->getId() ]);
 
 
     }
