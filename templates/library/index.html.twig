@@ -1,24 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Bibliothèque{% endblock %}
+    {% block stylesheets %}
+        <link href="{{ asset('asset/css/show_book.css') }}" rel="stylesheet">
+    {% endblock %}
 
 {% block body %}
 
 <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+<div class="container mt-5">
+<div class="row">
 
 {% if books is not empty %}
 {% for book in books %}
-<p>{{ book.title }}</p>
-<p>{{ book.author }}</p>
-<p>{{ book.resume }}</p>
-<p><img src="{{ book.picture }}" whith="150" height="200"></p>
 
-{% endfor %}
-{% endif %}
+<div class="col-md-4">
+
+<div class="card my-3 shadow" style="width: 15rem;">
+  <img src="{{ book.picture }}" height="280" class="card-img-top p-4" alt="...">
+  <div class="card-body">
+    <h5 class="card-title text-center">{{ book.title }}</h5>
+    <h6 class="card-title text-center">{{ book.author }}</h6>
+    <p class="card-text">{{ book.resume| slice(0,80) }}...</p>
+    {# substr($chaine, 0, 45).'...'; #}
+    
+  </div>
+</div>
+
+
 
 
 
 </div>
 
 
+{% endfor %}
+{% endif %}
+</div>
+</div>
+</div>
+
+
+
+
 {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('asset/js/show_book.js') }}"></script>
+    {% endblock %}

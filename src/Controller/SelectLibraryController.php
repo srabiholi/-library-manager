@@ -36,7 +36,6 @@ class SelectLibraryController extends AbstractController
 
         return $this->redirectToRoute('library', ['id' => $library->getId() ]);
 
-
     }
 
 
