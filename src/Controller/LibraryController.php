@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Library;
 use App\Repository\BookRepository;
-
 use App\Repository\LibraryRepository;
 use Symfony\Component\HttpFoundation\Response;
-
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
