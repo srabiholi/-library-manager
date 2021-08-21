@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}livre : {{ book.title }}{% endblock %}
+{% block stylesheets %}
+<link href="{{ asset('asset/css/book.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+<div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="container mt-5">
+
+
+    {# {% if books is not empty %} #}
+    {# {% for book in books %} #}
+
+    {# <div class="col-md-4"> #}
+
+    <div class="card_show my-3 shadow">
+      <div class="card_show-content">
+        <div>
+          <img src="{{ book.picture }}" class="p-5" alt="...">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title text-center mt-2">{{ book.title }}</h3>
+          <h4 class="card-title text-center">{{ book.author }}</h4>
+          <p class="card-text text-justify p-2">{{ book.resume }}</p>
+        </div>
+      </div>
+      <div class="card_show-footer">
+        <div>
+          {% for category in book.category %}
+            {# <a href="{{ path('book/category/', { category: category.name }) }}" class="btn btn-sm btn-secondary">{{ category.name }}</a> #}
+          {% endfor %}
+        </div>
+        <div>
+          {% if book.isread %}
+          <span class="badge rounded-pill bg-info text-dark">lu</span>
+          {% else %}
+          <span class="badge rounded-pill bg-info text-dark">Pas encore lu</span>
+          {% endif %}
+          {% if book.price %}
+            <a href="https://www.amazon.fr/s?k={{ book.title }}" target="_blank"> {{ book.price }} €</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+
+    {# </div> #}
+
+    {# {% endfor %}
+      {% endif %} #}
+
+  </div>
+</div>
+
+
+{% endblock %}

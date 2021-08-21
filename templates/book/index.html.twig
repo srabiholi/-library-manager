@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{% endblock %}
+    {% block stylesheets %}
+        <link href="{{ asset('asset/css/book.css') }}" rel="stylesheet">
+    {% endblock %}
+
+{% block body %}
+
+<div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="container mt-5">
+    <div class="row">
+
+      {% if books is not empty %}
+      {% for book in books %}
+
+      <div class="col-md-4">
+
+        <div class="card my-3 shadow" style="width: 15rem;">
+          <div class="card-content">
+            <img src="{{ book.picture }}" height="280" class="card-img-top p-4" alt="...">
+            <div class="card-body">
+              <h6 class="card-title text-center mb-1">{{ book.title }}</h6>
+              <p class="card-title text-center text-warning">{{ book.author }}</p>
+              <p class="card-text">{{ book.resume| slice(0,80) }}...</p>
+              <p class="d-none" id="bookId">{{ book.id }}</p>
+              <p class="d-none" id="libraryId">{{ book.library.id }}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div>
+              {% for category in book.category %}
+              <a href="#" class="btn btn-sm btn-secondary">{{ category.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+
+{{ parent() }}
+<script src="{{ asset('asset/js/show_book.js') }}"></script>
+{% endblock %}

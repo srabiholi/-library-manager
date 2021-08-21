@@ -1,49 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends 'home.html.twig' %}
 
-{% block title %}Bibliothèque{% endblock %}
-    {% block stylesheets %}
-        <link href="{{ asset('asset/css/show_book.css') }}" rel="stylesheet">
-    {% endblock %}
+{% block title %}Hello SelectLibraryController!{% endblock %}
+ {% block stylesheets %}
 
+ {% endblock %}
 {% block body %}
 
-<div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-<div class="container mt-5">
-<div class="row">
 
-{% if books is not empty %}
-{% for book in books %}
+<div class="container">
+    <div class="addLibrary">
 
-<div class="col-md-4">
+        <form method="post" action="{{ path('library_create') }}">
+            <label for="library">Donne un nom a ta bibliotheque</label>
+            <input type="text" name="library" id="library" class="form-control mt-3" required autofocus>
 
-<div class="card my-3 shadow" style="width: 15rem;">
-  <img src="{{ book.picture }}" height="280" class="card-img-top p-4" alt="...">
-  <div class="card-body">
-    <h5 class="card-title text-center">{{ book.title }}</h5>
-    <h6 class="card-title text-center">{{ book.author }}</h6>
-    <p class="card-text">{{ book.resume| slice(0,80) }}...</p>
-    {# substr($chaine, 0, 45).'...'; #}
-    
-  </div>
+            <button class="btn btn-sm btn-primary mt-2 mx-auto" type="submit">
+                Valider
+            </button>
+        </form>
+
+    </div>
+
+    <div class="row">
+
+        {% if librarys != null %}
+        {% for library in librarys %}
+        <div class="col-md-6">
+            <div class="selectLibrary">
+                <a href="{{ path('library_show', { id: library.id }) }}"><h3 class="text-center">{{ library.name }}</h3></a>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+    </div>
 </div>
-
-
-
-
-
-</div>
-
-
-{% endfor %}
-{% endif %}
-</div>
-</div>
-</div>
-
-
 
 
 {% endblock %}
-    {% block javascripts %}
-        <script src="{{ asset('asset/js/show_book.js') }}"></script>
-    {% endblock %}
+{% block javascripts %}
+
+{{ parent() }}
+<script src="{{ asset('asset/js/show_book.js') }}"></script>
+{% endblock %}

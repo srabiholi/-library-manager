@@ -22,7 +22,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom',
+                'label' => 'register.name',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez entrer un nom',
@@ -35,7 +35,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom',
+                'label' => 'register.firstname',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez entrer un prénom',
@@ -48,21 +48,23 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('birthday', DateType::class, [
-                'label' => 'Date de naissance',
+                'label' => 'register.birthday',
                 'years' => range(date('Y')-80, date('Y')-4),
             ])
             ->add('city', TextType::class, [
-                'label' => 'Ville',
+                'label' => 'register.city',
             ])
             ->add('postCode', TextType::class,[
-                'label' => 'Code postal',  
+                'label' => 'register.postcode',  
              ])
             ->add('country', CountryType::class, [
                 'preferred_choices' => ['FR'],
-                'label' => 'Pays',
+                'label' => 'register.country',
   
             ])
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'register.email'
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -72,7 +74,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                'label' => 'Mot de passe',
+                'label' => 'register.plainPassword',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,

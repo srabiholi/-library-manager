@@ -5,38 +5,64 @@ namespace App\Controller;
 use App\Entity\Library;
 use App\Repository\BookRepository;
 use App\Repository\LibraryRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+/**
+ * @Route("/library/", name="library_")
+ */
 class LibraryController extends AbstractController
 {
+    
     /**
-     * @Route("/library/{id}", name="library")
+     * @Route("{id}", name="show")
      */
-    public function index(BookRepository $bookRepo, LibraryRepository $repository, Library $library, SessionInterface $session): Response
+    public function show(BookRepository $bookRepo, LibraryRepository $repository, Library $library): Response
     {
 
-        $user = $this->getUser()->getId();
-        $library = $repository->findOneBy(['user' => $user, 'id' =>$library]);
-
-        $session->set('library', $library);
-        $sessionLibrary = $session->get('library', $library);
-        // dump($sessionLibrary);
-        // dump($session->get('library'));
-
-
-        
+        $library = $repository->findOneBy(['user' => $this->getUser()->getId(), 'id' =>$library]);
         $books = $bookRepo->findBy(['library' =>$library]);
-        dump($books);
-        
 
-        return $this->render('library/index.html.twig', [
-            'library' => $sessionLibrary,
+        return $this->render('library/show.html.twig', [
+            'library' => $library,
             'books' => $books,
         ]);
     }
 
+    /**
+     * @Route("create", name="create", priority=2)
+     */
+    public function create(Request $request, EntityManagerInterface $entityManager)
+    {
+        $library = new Library;
+
+        if($request->request->count() > 0){
+            $library->setName($request->request->get('library'));
+            $library->setUser($this->getUser());
+        }
+        
+        $entityManager->persist($library);
+        $entityManager->flush();
+ 
+        return $this->redirectToRoute('library_show', ['id' => $library->getId() ]);
+    }
+
+
+    /**
+     * @Route(" ", name="list")
+     */
+    public function index(LibraryRepository $repository): Response
+    {
+        $librarys = $repository->findBy(['user' => $this->getUser()->getId()]);
+
+        return $this->render('library/index.html.twig', [
+            'librarys' => $librarys,
+        ]);
+    }
 
 }

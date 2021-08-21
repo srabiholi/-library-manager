@@ -48,6 +48,12 @@ class Category
      */
     private $books;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Library::class, inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $library;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -146,6 +152,18 @@ class Category
         if ($this->books->removeElement($book)) {
             $book->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getLibrary(): ?Library
+    {
+        return $this->library;
+    }
+
+    public function setLibrary(?Library $library): self
+    {
+        $this->library = $library;
 
         return $this;
     }

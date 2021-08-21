@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LibraryRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,22 +32,28 @@ class Library
      *      maxMessage = "le nom de votre Bibliothèque doit pas dépasser {{limit}} caractères"
      * )
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Book::class, mappedBy="library", orphanRemoval=true)
      */
-    private $books;
+    private Collection $books;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="libraries")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private User $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private DateTime $createdAt;
 
     public function __construct()
     {
         $this->books = new ArrayCollection();
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int
@@ -62,6 +69,18 @@ class Library
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -107,6 +126,4 @@ class Library
 
         return $this;
     }
-
-
 }

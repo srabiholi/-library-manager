@@ -5,85 +5,21 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('asset/css/base.css') }}" rel="stylesheet">
+    {# <link href="{{ asset('asset/css/base.css') }}" rel="stylesheet"> #}
+    <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css">
     {% block stylesheets %}{% endblock %}
+
 
     {% block javascripts %}{% endblock %}
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">{{ library.name }}</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    {% if app.user %}
-                    <div class="text-light mx-auto">
-                        <a class="btn btn-secondary" href="{{ path('app_logout') }}">Déconnexion</a>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="container-fluid">
-        <div class="row">
-
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
-                                Profil
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('add_book') }}">
-                                Ajouter un livre
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Ajouter un magazine
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Ajouter un Journal
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Statistique
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('library', { id: library.id }) }}">
-                                Ma bibliothèque
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                {# <div><a href="#">Se déconnecter<a></div> #}
-            </nav>
-
-
-            {% block body %}{% endblock %}
-        </div>
+    {% include "_shared/_navbar.html.twig" %}
+    <div class="container">
+    {% block body %}{% endblock %}
     </div>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

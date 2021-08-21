@@ -96,7 +96,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('select_library'));
+        return new RedirectResponse($this->urlGenerator->generate('library_list'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

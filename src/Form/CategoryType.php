@@ -17,7 +17,7 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom de la Categorie',
+                'label' => 'category.name',
                 'attr' => ['class' => 'my-2'],
                 'constraints' => [
                     new NotBlank(),
@@ -27,8 +27,10 @@ class CategoryType extends AbstractType
                     ]),
                 ]
             ])
-                //->add('parent')
-            ->add('Valider', SubmitType::class)
+
+            ->add('submit', SubmitType::class, [
+                'label' => 'category.valid'
+            ])
         ;
     }
 

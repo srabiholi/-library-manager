@@ -1,0 +1,24 @@
+register:
+  name: 'Nom'
+  firstname: 'Prénom'
+  birthday: 'Date de naissance'
+  city: 'Ville'
+  postcode: 'Code Postal'
+  country: 'Pays'
+  email: 'Email'
+  plainPassword: 'Mot de passe'
+
+book:
+  title: 'Titre'
+  author: 'Auteur'
+  resume: 'Résumé du livre'
+  picture: 'Image ou Première de couverture'
+  price: 'Prix'
+  isRead: 'Livre lu'
+  own: 'Livre en bibliothèque'
+  category: 'Catégories'
+  valid: 'Valider'
+
+category:
+  name: 'Nom de la Categorie'
+  valid: 'Valider'
